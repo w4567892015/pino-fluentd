@@ -1,5 +1,7 @@
 # pino-fluentd
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg?style=flat)](https://github.com/iamturns/eslint-config-airbnb-typescript)
+
 Load [pino](https://github.com/pinojs/pino) logs into [Fluentd](https://www.fluentd.org).
 
 ## Install

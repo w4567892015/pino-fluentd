@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  fluent:
+    image: fluent/fluentd
+    volumes:
+      - ./fluent-data:/fluentd/log
+      - ./fluent.conf:/fluentd/etc/fluent.conf
+    ports:
+      - 24224:24224
+      - 24224:24224/udp

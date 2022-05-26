@@ -1,0 +1,13 @@
+.husky
+.eslintrc
+.gitmessage
+.lintstagedrc
+.prettierrc
+tsconfig.json
+.github/
+examples/
+test/
+src/
+dockerfile
+docker-compose.yml
+fluent.conf

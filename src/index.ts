@@ -41,7 +41,7 @@ function setDateTimeString(value: any) {
  * Pino Fluent transport
  * @param opts Options
  */
-function PinoFluent(opts: PinoFluentConfigs) {
+function PinoFluentd(opts: PinoFluentConfigs) {
   const index = opts.index ? parseIndexName(opts.index) : 'pino.fluentd';
 
   const client = new FluentClient(index, {
@@ -75,4 +75,4 @@ function PinoFluent(opts: PinoFluentConfigs) {
   return splitter;
 }
 
-module.exports = PinoFluent;
+export default PinoFluentd;

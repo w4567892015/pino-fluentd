@@ -12,3 +12,4 @@
 .tscache
 coverage-unmapped.json
 npm-debug.log
+fluent-data
