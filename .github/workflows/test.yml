@@ -40,7 +40,10 @@ jobs:
       - name: Build package
         run: yarn build
 
-      - name: Run tests
+      - name: Run test
+        run: yarn test
+
+      - name: Run coverage
         run: yarn test:coverage
 
       - name: Upload coverage to Codecov
