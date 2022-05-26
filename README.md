@@ -17,7 +17,7 @@ const pinoFluentd = require('pino-fluentd')
 
 const streamToFluentd = pinoFluentd({
   index: 'an-index-%{DATE}',
-  host: 'http://localhost',
+  host: 'localhost',
   port: 24224,
   client: {
     milliseconds: true,
