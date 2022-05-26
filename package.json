@@ -1,6 +1,6 @@
 {
   "name": "@viewsonic-mvb/pino-fluentd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Load pino logs into Fluentd",
   "main": "dist/index.js",
   "scripts": {
