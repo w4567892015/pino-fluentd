@@ -1,0 +1,51 @@
+name: test
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - ci-test
+      - main
+      - develop
+      - 'dev/*'
+      - 'feature/*'
+      - 'fix/*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build package
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
