@@ -3,12 +3,14 @@
   "version": "1.0.2",
   "description": "Load pino logs into Fluentd",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "prepack": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint",
-    "lint:fix": "eslint --fix",
-    "build": "tsc"
+    "lint:fix": "eslint --fix"
   },
   "keywords": [
     "pino",
