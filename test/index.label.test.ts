@@ -10,11 +10,14 @@ const streamToFluentd = pinoFluentd({
     eventRetry: {},
     flushInterval: 10,
   },
+  label: {
+    log: 'log',
+  }
 });
 
 const logger = Pino({ level: 'info' }, streamToFluentd);
 
-describe('Test Pino to Fluent', () => {
+describe('Test Pino to Fluent with custom label', () => {
   it('should emit log', (done) => {
     for (let index = 0; index < 10; index++) {
       logger.info(`hello world ${index}`);
