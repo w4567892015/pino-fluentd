@@ -5,12 +5,15 @@ import { EventRecord } from '@fluent-org/logger/build/src/protocol';
 export type PinoFluentConfigs = {
   /** Fluent Host */
   host: string;
-  /** Fluent Port */
+  /** Fluent Port. Default: 24224 */
   port?: number;
-  /** Index Name */
+  /** Index Name. Default: pino.fluentd */
   index?: string;
   /** Client Options */
   client?: FluentClientOptions;
+  label?: {
+    log?: string;
+  }
 };
 
 /**
@@ -37,6 +40,14 @@ function setDateTimeString(value: any) {
   return new Date().toISOString();
 }
 
+function emit(client: FluentClient, label: string, value: EventRecord) {
+  if (label) {
+    client.emit(label, value);
+  } else {
+    client.emit(value);
+  }
+}
+
 /**
  * Pino Fluent transport
  * @param opts Options
@@ -59,7 +70,7 @@ function PinoFluentd(opts: PinoFluentConfigs) {
       try {
         value = JSON.parse(line);
       } catch (error) {
-        client.emit('error', error);
+        emit(client, 'error.parse', error);
         return;
       }
 
@@ -67,7 +78,7 @@ function PinoFluentd(opts: PinoFluentConfigs) {
         value['@timestamp'] = setDateTimeString(value);
       }
 
-      client.emit('insert', value);
+      emit(client, opts.label?.log, value);
     },
     { autoDestroy: true },
   );
